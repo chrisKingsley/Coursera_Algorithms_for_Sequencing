@@ -31,6 +31,7 @@ def naive_with_counts(p, t):
     return (occurrences, numAligns, numCharCompares)
     
     
+# Boyer-Moore algorithm for exact pattern matching
 def boyer_moore(p, p_bm, t):
     """ Do Boyer-Moore matching. p=pattern, t=text,
         p_bm=BoyerMoore object for p """
@@ -53,7 +54,9 @@ def boyer_moore(p, p_bm, t):
         i += shift
     return occurrences
     
-    
+
+# Boyer-Moore algorithm that also returns the number
+# of alignments and character comparisons performed
 def boyer_moore_with_counts(p, p_bm, t):
     """ Do Boyer-Moore matching. p=pattern, t=text,
         p_bm=BoyerMoore object for p """
@@ -90,6 +93,9 @@ aluSeq = 'GGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCGAGG'
 # print boyer_moore_with_counts(aluSeq, p_bm, ch1_portion)
 
 
+# An approximate text matcher that uses the pigeonhole principle
+# and Boyer-Moore algorithm to find the location of matches with
+# an allowable Hamming distance
 def approx_match(p, t, n):
     segmentLength = int(round(len(p) / (n+1)))
     allMatches = set()
@@ -128,7 +134,8 @@ short_alu = 'GGCGCGGTGGCTCACGCCTGTAAT'
 # print matches, len(matches), numIndexHits
 
 
-
+# Class that forms an index on a sequence, but indexes using subsequences
+# rather than substrings
 class SubseqIndex(object):
     """ Holds a subsequence index for a text T """
     
@@ -156,7 +163,9 @@ class SubseqIndex(object):
             i += 1
         return hits
         
-        
+   
+# returns the number of index hits when finding an approximate match
+# of a pattern in a string  using a subsequence index   
 def approxMatchSubSeq(p, t, subIdx, n):
     segmentLength = int(round(len(p) / (n+1)))
     print segmentLength
